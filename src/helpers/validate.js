@@ -27,10 +27,10 @@ export const RegisterValidations = () => {
   return Yup.object().shape({
     email: Yup.string()
       .email('Invalid email, please provide a valid email.')
-      .required('Email is required'),
-    firstName: Yup.string().required('first name is required'),
-    lastName: Yup.string().required('last name is required'),
-    password: Yup.string().required('Password is required'),
+      .required('Email is required').min(5, "Email should be 5 atleast charcters"),
+    firstName: Yup.string().required('first name is required').min(5, "first name should be atleast 5 charcters"),
+    lastName: Yup.string().required('last name is required').min(5, "last name should be atleast 5 charcters"),
+    password: Yup.string().required('Password is required').min(5, "Password  should be atleast 5 charcters"),
   });
 }
 
