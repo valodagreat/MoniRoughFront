@@ -13,6 +13,7 @@ const VerifyApp = () => {
   // const navigate = useNavigate();
 
   const { isFetching, isError, error, isSuccess } = useQuery(
+    ['verify'],
     ()=>  axios.get('/wallet/verifyfunds', {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -37,7 +38,7 @@ console.log(isFetching, isError, error, isSuccess)
     queryClient.invalidateQueries({
       queryKey: ["wallet"],
     })
-    localStorage.clear()
+    // localStorage.clear()
     window.location.href = window.location.protocol + "//" + window.location.host + "/app"
   }
   return (
