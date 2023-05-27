@@ -9,6 +9,7 @@ import VerifyApp from '../pages/app/VerifyApp';
 import Register from '../pages/auth/Register';
 import SignIn from '../pages/auth/SignIn';
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const AllRoutes = () => {
 
@@ -23,11 +24,11 @@ const AllRoutes = () => {
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <SignIn />,
+        element: <PublicRoute><SignIn /></PublicRoute>,
     },
     {
         path: "/register",
-        element: <Register />,
+        element: <PublicRoute><Register /></PublicRoute>,
     },
     {
         path: "/app",
