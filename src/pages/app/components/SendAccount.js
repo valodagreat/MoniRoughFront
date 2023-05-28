@@ -37,7 +37,7 @@ const SendAccount = ({ isFundLoading, isFundIsError, isFundError, isFundIsSucces
         if(isError){
           toast.error(error?.response?.data?.message);
           if(error?.response?.data?.message === "Invalid token"){
-            localStorage.clear()
+            localStorage.removeItem('token')
             navigate("/")
           }
         }
@@ -47,7 +47,7 @@ const SendAccount = ({ isFundLoading, isFundIsError, isFundError, isFundIsSucces
         if(isFundIsError){
           toast.error(isFundError?.response?.data?.message);
           if(isFundError?.response?.data?.message === "Invalid token"){
-            localStorage.clear()
+            localStorage.removeItem('token')
             navigate("/")
           }
         }

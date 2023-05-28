@@ -14,12 +14,16 @@ import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 const HomeApp = () => {
-    const [ blur, setBlur ] = React.useState(false);
+    const [ blur, setBlur ] = React.useState(JSON.parse(localStorage.getItem("blur")) || false);
     const navigate = useNavigate();
     const { state } = useLocation();
     const logout = () => {
-        localStorage.clear()
+        localStorage.removeItem('token')
         navigate("/")
+    }
+    const handleBlur = () => {
+        localStorage.setItem("blur", !blur);
+        setBlur((val)=> !val)
     }
     const { isLoading, isError, data, error, refetch: walletRefetch } = useQuery({
         queryKey: ['wallet'],
@@ -121,7 +125,7 @@ const HomeApp = () => {
         if(isFundingIsError){
           toast.error(isFundingError?.response?.data?.message);
           if(isFundingError?.response?.data?.message === "Invalid token"){
-            localStorage.clear()
+            localStorage.removeItem('token')
             navigate("/")
           }
         }
@@ -131,7 +135,7 @@ const HomeApp = () => {
         if(isError){
           toast.error(error?.response?.data?.message);
           if(error?.response?.data?.message === "Invalid token"){
-            localStorage.clear()
+            localStorage.removeItem('token')
             navigate("/")
           }
         }
@@ -141,7 +145,7 @@ const HomeApp = () => {
         if(transisError){
           toast.error(transError?.response?.data?.message);
           if(transError?.response?.data?.message === "Invalid token"){
-            localStorage.clear()
+            localStorage.removeItem('token')
             navigate("/")
           }
         }
@@ -166,7 +170,7 @@ const HomeApp = () => {
                             <p className={`font-semibold text-[24px] md:text-[32px] ${blur && "blur-[10px]"}`} >{!isLoading ? currency.format(data?.data?.data?.balance) : "____"}</p>
                             {isLoading &&<p className='text-[#787b80] text-[14px]' >Fetching Balance</p>}
                         </div>
-                        <div onClick={()=> setBlur((val)=> !val)} className='cursor-pointer' >
+                        <div onClick={handleBlur} className='cursor-pointer' >
                             {blur ? <Icon id="hide-password-icon" width="24px" height="24px" /> : <Icon id="show-password-icon" width="24px" height="24px" />}
                         </div>
                     </div>

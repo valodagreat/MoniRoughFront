@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
     }, [navigate]);
 
     const handleLogout = () => {
-        localStorage.clear()
+        localStorage.removeItem("token")
         navigate("/")
       };
   

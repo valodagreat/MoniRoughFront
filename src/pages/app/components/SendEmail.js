@@ -39,7 +39,7 @@ const SendEmail = ({ isFundLoading, isFundIsError, isFundError, isFundIsSuccess,
       if(isError){
         toast.error(error?.response?.data?.message);
         if(error?.response?.data?.message === "Invalid token"){
-          localStorage.clear()
+          localStorage.removeItem('token')
           navigate("/")
         }
       }
@@ -49,7 +49,7 @@ const SendEmail = ({ isFundLoading, isFundIsError, isFundError, isFundIsSuccess,
       if(isFundIsError){
         toast.error(isFundError?.response?.data?.message);
         if(isFundError?.response?.data?.message === "Invalid token"){
-          localStorage.clear()
+          localStorage.removeItem('token')
           navigate("/")
         }
       }
