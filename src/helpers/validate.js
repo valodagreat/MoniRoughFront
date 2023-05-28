@@ -37,7 +37,7 @@ export const RegisterValidations = () => {
 export const AccountValidations = () => {
   return Yup.object().shape({
     accountNumber: Yup.number()
-      .typeError('Account number must be a number')
+      .typeError('Enter a valid accountnumber')
       .required('accountNumber is required').min(10, "Account number must be at least 10 characters").positive("Account number must be a positive value"),
   });
 }
@@ -45,9 +45,9 @@ export const AccountValidations = () => {
 export const SendByAccountValidations = () => {
   return Yup.object().shape({
     accountNumber: Yup.number()
-      .typeError('Account number must be a number')
+      .typeError('Enter a valid accountnumber')
       .required('accountNumber is required').min(10, "Account number must be at least 10 characters").positive("Account number must be a positive value"),
-    amount: Yup.number().typeError('Amount to be donated must be a number').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
+    amount: Yup.number().typeError('Enter a valid amount').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
   });
 }
 
@@ -56,13 +56,13 @@ export const SendByEmailValidations = () => {
     email: Yup.string()
       .email('Invalid email, please provide a valid email.')
       .required('Email is required'),
-    amount: Yup.number().typeError('Amount to be donated must be a number').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
+    amount: Yup.number().typeError('Enter a valid amount').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
   });
 }
 
 export const DonateValidations = () => {
   return Yup.object().shape({
-    amount: Yup.number().typeError('Amount to be donated must be a number').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
+    amount: Yup.number().typeError('Enter a valid amount').positive("Amount to be donated must be a positive value").required('Amount to be donated is required'),
   });
 }
 

@@ -5,7 +5,7 @@ const LogoutTimer = ({ logout }) => {
 
   const handleResetTimer = useCallback(() => {
     clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(logout, 2 * 60 * 1000); // 2 minutes (2 * 60 * 1000 milliseconds)
+    timerRef.current = setTimeout(logout, 10 * 60 * 1000); // 10 minutes (10 * 60 * 1000 milliseconds)
   }, [logout]);
 
   const resetTimer = useCallback(() => {

@@ -96,7 +96,7 @@ const SendEmail = ({ isFundLoading, isFundIsError, isFundError, isFundIsSuccess,
                   touched={formik.touched.email}
                   autoFocus
               />}
-                {isSuccess && <p className='pb-3' >To: {data?.data?.data?.firstName} {data?.data?.data?.lastName}</p>}
+                {isSuccess && <p className='pb-3 font-semibold' >To: {data?.data?.data?.firstName} {data?.data?.data?.lastName}</p>}
                 {isSuccess && (isEditing ? <InputField
                     className=" mb-8"
                     type="number"

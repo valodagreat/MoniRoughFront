@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+// import React, { useEffect } from 'react'
+// import { useNavigate } from 'react-router-dom';
 
 const PublicRoute = ({children}) => {
-    const navigate = useNavigate();
-    useEffect(()=>{
-        if(localStorage.getItem("token")){
-            navigate("/app")
-        }
-    }, [navigate]);
+    // const navigate = useNavigate();
+    // useEffect(()=>{
+    //     if(localStorage.getItem("token")){
+    //         navigate("/app")
+    //     }
+    // }, [navigate]);
 
   return (
     <div>

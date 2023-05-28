@@ -28,7 +28,20 @@ const HomeApp = () => {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
         }),
+        retry: false,
+        enabled: !!localStorage.getItem('token')
     })
+
+    const { isInitialLoading: userLoading,  data: userData} = useQuery(
+        ['user'],
+        ()=>  axios.get('/user/me', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        }),
+        {enabled: !state?.user?.firstName},
+        {retry: false},
+    )
 
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text)
@@ -42,6 +55,8 @@ const HomeApp = () => {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
         }),
+        retry: false,
+        enabled: !!localStorage.getItem('token')
     })
 
     const mutation = useMutation({
@@ -145,7 +160,7 @@ const HomeApp = () => {
         <div className='h-[90%] flex items-center justify-center ' >
             <div className='w-[600px] shadow-[0px_15px_30px_40px_rgba(230,102,82,.07)] rounded-[20px] h-[500px] mx-3 p-5' >
                 <div className='pb-2' >
-                    <p className='md:px-5 pt-5 text-[21px]' >Hi, {state?.user?.firstName}</p>
+                    <p className='md:px-5 pt-5 text-[21px]' >Hi, {userLoading ? "___" : state?.user?.firstName ? state?.user?.firstName : userData?.data?.data?.firstName}</p>
                     <div className='md:px-5 pt-2 md:pt-4 flex items-center w-full justify-between' >
                         <div>
                             <p className={`font-semibold text-[24px] md:text-[32px] ${blur && "blur-[10px]"}`} >{!isLoading ? currency.format(data?.data?.data?.balance) : "____"}</p>
@@ -168,7 +183,7 @@ const HomeApp = () => {
                                     <div onClick={()=>close()} className='bg-[#E66652] right-[-20px] top-[-20px] absolute cursor-pointer rounded-full h-[40px] w-[40px] flex justify-center items-center text-[24px]' >&times;</div>
                                     <div className='p-5' >
                                     <h1 className='text-[20px] font-semibold' >Fund Wallet</h1>
-                                    <p onClick={()=> handleCopy(state?.user?.accountNumber)} className='py-2 border-b border-[#d7e0df] cursor-pointer my-2 flex justify-between items-center' >Account number: {state?.user?.accountNumber} <span>click to copy</span></p>
+                                    <p onClick={()=> handleCopy(userLoading ? "___" : state?.user?.accountNumber ? state?.user?.accountNumber : userData?.data?.data?.accountNumber)} className='py-2 border-b border-[#d7e0df] cursor-pointer my-2 flex justify-between items-center' >Account number: {userLoading ? "___" : state?.user?.accountNumber ? state?.user?.accountNumber : userData?.data?.data?.accountNumber} <span>click to copy</span></p>
                                     <Popup
                                         trigger={<p className='py-2 border-b border-[#d7e0df] cursor-pointer' >Fund with paystack</p>}
                                         modal
