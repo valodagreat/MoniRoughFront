@@ -12,6 +12,7 @@ import axios from "../../api/axios";
 import { currency } from '../../helpers/utils';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
+import ImageRefetch from "../../assets/Refetch.jpeg"
 
 const HomeApp = () => {
     const [ blur, setBlur ] = React.useState(JSON.parse(localStorage.getItem("blur")) || false);
@@ -164,7 +165,13 @@ const HomeApp = () => {
         <div className='h-[90%] flex items-center justify-center ' >
             <div className='w-[600px] shadow-[0px_15px_30px_40px_rgba(230,102,82,.07)] rounded-[20px] h-[500px] mx-3 p-5' >
                 <div className='pb-2' >
-                    <p className='md:px-5 pt-5 text-[21px]' >Hi, {userLoading ? "___" : state?.user?.firstName ? state?.user?.firstName : userData?.data?.data?.firstName}</p>
+                    <div className='flex justify-between items-center pt-5 pb-1 md:px-5 pr-1' >
+                        <p className=' text-[21px]' >Hi, {userLoading ? "___" : state?.user?.firstName ? state?.user?.firstName : userData?.data?.data?.firstName}</p>
+                        <img onClick={()=> {
+                            walletRefetch()
+                            refetch()
+                        }} className='cursor-pointer w-[20px] h-[20px]' src={ImageRefetch} alt="refetch" />
+                    </div>
                     <div className='md:px-5 pt-2 md:pt-4 flex items-center w-full justify-between' >
                         <div>
                             <p className={`font-semibold text-[24px] md:text-[32px] ${blur && "blur-[10px]"}`} >{!isLoading ? currency.format(data?.data?.data?.balance) : "____"}</p>
