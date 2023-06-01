@@ -12,15 +12,19 @@ import axios from "../../api/axios";
 import { currency } from '../../helpers/utils';
 import { TailSpin } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
-import ImageRefetch from "../../assets/Refetch.jpeg"
+import ImageRefetch from "../../assets/Refetch.jpeg";
+import { useQueryClient } from '@tanstack/react-query';
 
 const HomeApp = () => {
     const [ blur, setBlur ] = React.useState(JSON.parse(localStorage.getItem("blur")) || false);
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { state } = useLocation();
     const logout = () => {
-        localStorage.removeItem('token')
-        navigate("/")
+        localStorage.removeItem('token');
+        queryClient.clear(); // Clear all queries
+        queryClient.removeQueries(); // Remove all queries from the cache
+        navigate("/");
     }
     const handleBlur = () => {
         localStorage.setItem("blur", !blur);
