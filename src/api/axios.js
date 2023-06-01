@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://monitest.onrender.com/api",
+    baseURL: "https://spring-green-gecko-tutu.cyclic.app/api",
 });
 
 export default instance;
